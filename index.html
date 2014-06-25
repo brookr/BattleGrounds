@@ -60,7 +60,7 @@
 
           <div id="div1" class="inner cover">
             <h1 class="cover-heading">BattleGrounds</h1>
-            <p class="lead">BattleGrounds is a game created while learing to code at Code Fellows Foundations-1 Class. What started in JavaScript with alert boxes and console.log messages has finally grown up! This new version allows a visual along with the game. The art comes from screenshot snippets from "Battlehearts Legacy" for the iOS then modified just so.</p>
+            <p class="lead">BattleGrounds is a game created while learing to code at Code Fellows Foundations-1 Class. What started in JavaScript with alert boxes and console.log messages has finally grown up! This new version allows a visual along with the game. The art comes from screenshot snippets of my iPad of "Battlehearts Legacy" then modified just so.</p>
             
           </div>
 
@@ -100,24 +100,26 @@
       <script>
 
       $(document).ready(function(){
-         var wins, compare;
+         var player, computer, wins, compare;
          
          $("#playerName").click(function(){
-            var player = $("#player").val();
-            var computer = $("#computer").val();
-            alert(computer);
-
-          function Challenger (name) {
-            this.name = name,
-            this.heads = 0,
-            this.flip = function () {
-              if(Math.random() > 0.49) {
-                this.heads = this.heads + 1;  
+            function Challenger (name) {
+              this.name = name,
+              this.heads = 0,
+              this.flip = function () {
+                if(Math.random() > 0.49) {
+                  this.heads = this.heads + 1;  
+                }
               }
-            }
-          } 
+            } 
+//player = new Challenger (prompt("What is your name?")); base the way it needs to work with this command string...
 
-          alert(this.heads)   
+            player = new Challenger ($("#player").val());
+            computer = new Challenger ($("#computer").val());
+
+//test to see if the Challenger object variables are being defined           
+            alert(player.name)   
+            alert(computer.name)
 
           wins = 3;
            
