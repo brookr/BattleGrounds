@@ -25,16 +25,16 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   <style id="clearly_highlighting_css" type="text/css">
-    
+
     /* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); }
      html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); }
-    /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    
-      cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } 
-    /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } 
-    /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } 
-    /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } 
-      em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } 
-    /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    
+    /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */
+      cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; }
+    /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; }
+    /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; }
+    /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; }
+      em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; }
+    /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }
       em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style>
       <style id="holderjs-style" type="text/css"></style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style>
   </head>
@@ -61,18 +61,23 @@
           <div id="div1" class="inner cover">
             <h1 class="cover-heading">BattleGrounds</h1>
             <p class="lead">BattleGrounds is a game created while learing to code at Code Fellows Foundations-1 Class. What started in JavaScript with alert boxes and console.log messages has finally grown up! This new version allows a visual along with the game. The art comes from screenshot snippets of my iPad of "Battlehearts Legacy" then modified just so.</p>
-            
+
           </div>
 
           <div id="div2" class="inner cover">
-            <p class="lead">Name your character for battle: <input id="player" type="text"></p>
-            <p class="lead">Name your opponent for battle: <input id="computer" type="text"></p>
+            <p class="lead">
+              Name your character for battle:
+              <input id="player" type="text">
+            </p>
+            <p class="lead">
+              Name your opponent for battle:
+              <input id="computer" type="text"></p>
             <p class="lead">
               <button id="playerName" class="btn btn-lg btn-default">Lets Play</button>
             </p>
           </div>
 
-          <div id="div3" class="inner cover">
+          <div id="results" class="inner cover">
             <h4 class="cover-heading">Results</h4>
             <p class="lead"> <!-- Put results here --> </p>
           </div>
@@ -96,33 +101,33 @@
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="javascript/bootstrap.min.js"></script>
     <script src="javascript/docs.min.js"></script>
-    
+
       <script>
 
       $(document).ready(function(){
-         var player, computer, wins, compare;
-         
-         $("#playerName").click(function(){
-            function Challenger (name) {
-              this.name = name,
-              this.heads = 0,
-              this.flip = function () {
-                if(Math.random() > 0.49) {
-                  this.heads = this.heads + 1;  
-                }
-              }
-            } 
-//player = new Challenger (prompt("What is your name?")); base the way it needs to work with this command string...
+        var player, computer, wins, compare;
 
-            player = new Challenger ($("#player").val());
-            computer = new Challenger ($("#computer").val());
+        function Challenger (name) {
+          this.name = name,
+          this.heads = 0,
+          this.flip = function () {
+            if(Math.random() > 0.49) {
+              this.heads = this.heads + 1;
+            }
+            $("#results p").append(this.name + " flipped heads " + this.heads + " times! <br>")
+          }
+        }
 
-//test to see if the Challenger object variables are being defined           
-            alert(player.name)   
-            alert(computer.name)
+        $("#playerName").on("click", function(){
+          player = new Challenger ($("#player").val());
+          computer = new Challenger ($("#computer").val());
+
+          // Test to see if the Challenger object variables are being defined.
+          console.log("P1: " + player.name)
+          console.log("P2: " + computer.name)
 
           wins = 3;
-           
+
           while (player.heads < wins && computer.heads < wins) {
             player.flip();
             computer.flip();
@@ -134,14 +139,14 @@
               console.log("We have a tie!");
             } else if(player.heads > computer.heads) {
               console.log(player.name + " wins the game!");
-              } else {
-                console.log(computer.name + " wins the game! Bugga!")
-                }
+            } else {
+              console.log(computer.name + " wins the game! Bugga!")
+            }
           }
-         
-        compare();
 
-        });  
+          compare();
+
+        });
       });
 
       </script>
