@@ -47,7 +47,7 @@ input {
 html,
 body {
   height: 100%;
-  background-image: url("file:///Users/DaddyMac/Desktop/Code_Fellows/BattleGrounds/images/door.jpg");
+  background-image: url("images/door.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-color: black;
